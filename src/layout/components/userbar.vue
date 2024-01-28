@@ -120,7 +120,7 @@
 		},
 		created() {
 			var userInfo = this.$TOOL.data.get("USER_INFO");
-			this.userName = userInfo.userName;
+			this.userName = userInfo.adminName;
 			this.userNameF = this.userName.substring(0,1);
 		},
 		methods: {

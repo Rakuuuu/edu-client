@@ -2,12 +2,12 @@
 	<el-form ref="loginForm" :model="form" :rules="rules" label-width="0" size="large" @keyup.enter="login">
 		<el-form-item prop="user">
 			<el-input v-model="form.user" prefix-icon="el-icon-user" clearable :placeholder="$t('login.userPlaceholder')">
-				<template #append>
-					<el-select v-model="userType" style="width: 130px;">
-						<el-option :label="$t('login.admin')" value="admin"></el-option>
-						<el-option :label="$t('login.user')" value="user"></el-option>
-					</el-select>
-				</template>
+<!--				<template #append>-->
+<!--					<el-select v-model="userType" style="width: 130px;">-->
+<!--						<el-option :label="$t('login.admin')" value="admin"></el-option>-->
+<!--						<el-option :label="$t('login.user')" value="user"></el-option>-->
+<!--					</el-select>-->
+<!--				</template>-->
 			</el-input>
 		</el-form-item>
 		<el-form-item prop="password">
@@ -36,13 +36,28 @@
 			return {
 				userType: 'admin',
 				form: {
-					user: "admin",
-					password: "admin",
+					user: "",
+					password: "",
 					autologin: false
 				},
 				rules: {
 					user: [
-						{required: true, message: this.$t('login.userError'), trigger: 'blur'}
+						{ required: true, message: this.$t('login.userError'), trigger: 'blur' },
+                        {
+                            message: '手机号格式不正确',
+							validator: (rule, value, callback) => {
+                                // 判断输入框中是否输入手机号
+                                if (!value) {
+                                    callback(new Error('手机号不能为空'))
+                                }
+                                //正则表达式进行验证手机号，从1开始，第二位是35789中的任意一位，以9数字结尾
+                                if (!/^1[35789]\d{9}$/.test(value)) {
+                                    callback(new Error('手机号格式不正确'))
+                                }
+                                callback()
+                            },
+							trigger: 'blur'
+                        }
 					],
 					password: [
 						{required: true, message: this.$t('login.PWError'), trigger: 'blur'}
@@ -73,51 +88,26 @@
 
 				this.islogin = true
 				var data = {
-					username: this.form.user,
+					adminPhone: this.form.user,
 					password: this.$TOOL.crypto.MD5(this.form.password)
 				}
 				//获取token
-				var user = await this.$API.auth.token.post(data)
-				if(user.code == 200){
+				var user = await this.$API.auth.login.post(data)
+                this.islogin = false
+				if(user.code == 0){
 					this.$TOOL.cookie.set("TOKEN", user.data.token, {
 						expires: this.form.autologin? 24*60*60 : 0
 					})
 					this.$TOOL.data.set("USER_INFO", user.data.userInfo)
 				}else{
-					this.islogin = false
 					this.$message.warning(user.message)
-					return false
-				}
-				//获取菜单
-				var menu = null
-				if(this.form.user == 'admin'){
-					menu = await this.$API.system.menu.myMenus.get()
-				}else{
-					menu = await this.$API.demo.menu.get()
-				}
-				if(menu.code == 200){
-					if(menu.data.menu.length==0){
-						this.islogin = false
-						this.$alert("当前用户无任何菜单权限，请联系系统管理员", "无权限访问", {
-							type: 'error',
-							center: true
-						})
-						return false
-					}
-					this.$TOOL.data.set("MENU", menu.data.menu)
-					this.$TOOL.data.set("PERMISSIONS", menu.data.permissions)
-					this.$TOOL.data.set("DASHBOARDGRID", menu.data.dashboardGrid)
-				}else{
-					this.islogin = false
-					this.$message.warning(menu.message)
 					return false
 				}
 
 				this.$router.replace({
 					path: '/'
 				})
-				this.$message.success("Login Success 登录成功")
-				this.islogin = false
+				this.$message.success("登录成功")
 			},
 		}
 	}

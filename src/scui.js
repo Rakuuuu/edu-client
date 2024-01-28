@@ -43,7 +43,7 @@ export default {
 		app.config.globalProperties.$API = api;
 		app.config.globalProperties.$AUTH = permission;
 		app.config.globalProperties.$ROLE = rolePermission;
-
+		app.config.globalProperties.$LOADING = false;
 		//注册全局组件
 		app.component('scTable', scTable);
 		app.component('scTableColumn', scTableColumn);

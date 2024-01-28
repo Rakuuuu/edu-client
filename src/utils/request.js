@@ -7,6 +7,7 @@ import router from '@/router';
 axios.defaults.baseURL = ''
 
 axios.defaults.timeout = sysConfig.TIMEOUT
+axios.defaults.withCredentials = true;
 
 // HTTP request 拦截器
 axios.interceptors.request.use(
@@ -63,6 +64,11 @@ axios.interceptors.response.use(
 						router.replace({path: '/login'});
 					}).catch(() => {})
 				}
+			} else if (error.response.status == -1) {
+				ElNotification.error({
+					title: '请求错误',
+					message: error.response.data.message || "未知错误！"
+				});
 			} else {
 				ElNotification.error({
 					title: '请求错误',

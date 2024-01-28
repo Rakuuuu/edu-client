@@ -31,7 +31,7 @@ const DEFAULT_CONFIG = {
 
 	//布局 默认：default | 通栏：header | 经典：menu | 功能坞：dock
 	//dock将关闭标签和面包屑栏
-	LAYOUT: 'default',
+	LAYOUT: 'menu',
 
 	//菜单是否折叠
 	MENU_IS_COLLAPSE: false,
@@ -49,7 +49,7 @@ const DEFAULT_CONFIG = {
 	COLOR: '',
 
 	//是否加密localStorage, 为空不加密，可填写AES(模式ECB,移位Pkcs7)加密
-	LS_ENCRYPTION: '',
+	LS_ENCRYPTION: 'AES',
 
 	//localStorageAES加密秘钥，位数建议填写8的倍数
 	LS_ENCRYPTION_key: '2XNN4K8LC0ELVWN4',

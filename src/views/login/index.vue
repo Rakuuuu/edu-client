@@ -47,28 +47,28 @@
 					<el-tab-pane :label="$t('login.accountLogin')" lazy>
 						<password-form></password-form>
 					</el-tab-pane>
-					<el-tab-pane :label="$t('login.mobileLogin')" lazy>
-						<phone-form></phone-form>
-					</el-tab-pane>
+<!--					<el-tab-pane :label="$t('login.mobileLogin')" lazy>-->
+<!--						<phone-form></phone-form>-->
+<!--					</el-tab-pane>-->
 				</el-tabs>
-				<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">
-					<el-divider>{{ $t('login.signInOther') }}</el-divider>
-					<div class="login-oauth">
-						<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"></el-button>
-					</div>
-				</template>
+<!--				<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">-->
+<!--					<el-divider>{{ $t('login.signInOther') }}</el-divider>-->
+<!--&lt;!&ndash;					<div class="login-oauth">&ndash;&gt;-->
+<!--&lt;!&ndash;						<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"></el-button>&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--				</template>-->
 			</div>
 		</div>
 	</div>
-	<el-dialog v-model="showWechatLogin" :title="$t('login.wechatLoginTitle')" :width="400" destroy-on-close>
-		<div class="qrCodeLogin">
-			<sc-qr-code class="qrCode" :text="WechatLoginCode" :size="200"></sc-qr-code>
-			<p class="msg">{{$tc('login.wechatLoginMsg', 1)}}<br/>{{$tc('login.wechatLoginMsg', 2)}}</p>
-			<div class="qrCodeLogin-result" v-if="isWechatLoginResult">
-				<el-result icon="success" :title="$tc('login.wechatLoginResult', 1)" :sub-title="$tc('login.wechatLoginResult', 2)"></el-result>
-			</div>
-		</div>
-	</el-dialog>
+<!--	<el-dialog v-model="showWechatLogin" :title="$t('login.wechatLoginTitle')" :width="400" destroy-on-close>-->
+<!--		<div class="qrCodeLogin">-->
+<!--			<sc-qr-code class="qrCode" :text="WechatLoginCode" :size="200"></sc-qr-code>-->
+<!--			<p class="msg">{{$tc('login.wechatLoginMsg', 1)}}<br/>{{$tc('login.wechatLoginMsg', 2)}}</p>-->
+<!--			<div class="qrCodeLogin-result" v-if="isWechatLoginResult">-->
+<!--				<el-result icon="success" :title="$tc('login.wechatLoginResult', 1)" :sub-title="$tc('login.wechatLoginResult', 2)"></el-result>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</el-dialog>-->
 </template>
 
 <script>
