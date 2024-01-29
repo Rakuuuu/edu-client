@@ -18,7 +18,6 @@ axios.interceptors.request.use(
         }
         if (!sysConfig.REQUEST_CACHE && config.method == 'get') {
             config.params = config.params || {};
-            config.params['_'] = new Date().getTime();
         }
         Object.assign(config.headers, sysConfig.HEADERS)
         return config;
@@ -34,6 +33,13 @@ let MessageBox_401_show = false
 // HTTP response 拦截器
 axios.interceptors.response.use(
     (response) => {
+        if (response.data.code === -1) {
+            ElNotification.error({
+                title: '请求错误',
+                message: response.data.message
+            });
+            return Promise.reject(response.data.message);
+        }
         return response;
     },
     (error) => {
@@ -77,12 +83,12 @@ axios.interceptors.response.use(
                 });
             }
         } else {
+            console.error(error)
             ElNotification.error({
                 title: '请求错误',
                 message: "请求服务器无响应！"
             });
         }
-
         return Promise.reject(error.response);
     }
 );

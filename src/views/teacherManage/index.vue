@@ -3,7 +3,6 @@
     <el-header>
       <div class="left-panel">
         <el-button type="primary" icon="el-icon-plus" @click="add"></el-button>
-        <el-button type="primary" icon="el-icon-plus" @click="addPage">页面新增</el-button>
         <el-button type="danger" plain icon="el-icon-delete" :disabled="selection.length==0"
                    @click="batch_del"></el-button>
       </div>
@@ -15,25 +14,26 @@
           row-key="id"
           @selection-change="selectionChange"
           stripe
-          :scPageSize="15"
       >
         <el-table-column type="selection" width="50"></el-table-column>
-        <el-table-column label="姓名" prop="name" width="180"></el-table-column>
-        <el-table-column label="性别" prop="sex" width="150"></el-table-column>
-        <el-table-column label="邮箱" prop="email" width="250"></el-table-column>
-        <el-table-column label="状态" prop="boolean" width="60">
-          <template #default="scope">
-            <sc-status-indicator v-if="scope.row.boolean" type="success"></sc-status-indicator>
-            <sc-status-indicator v-if="!scope.row.boolean" pulse type="danger"></sc-status-indicator>
-          </template>
-        </el-table-column>
+        <el-table-column label="姓名" prop="teacherName" width="180"></el-table-column>
+        <el-table-column label="手机号" prop="teacherPhone" width="150"></el-table-column>
+        <el-table-column label="邮箱" prop="teacherEmail" width="250"></el-table-column>
+        <el-table-column label="创建时间" prop="createdAt" width="150"></el-table-column>
+        <el-table-column label="修改时间" prop="createdAt" width="150"></el-table-column>
+<!--        <el-table-column label="状态" prop="boolean" width="60">-->
+<!--          <template #default="scope">-->
+<!--            <sc-status-indicator v-if="scope.row.boolean" type="success"></sc-status-indicator>-->
+<!--            <sc-status-indicator v-if="!scope.row.boolean" pulse type="danger"></sc-status-indicator>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
         <el-table-column label="评分" prop="num" width="150"></el-table-column>
         <el-table-column label="操作" fixed="right" align="right" width="300">
           <template #default="scope">
             <el-button plain size="small" @click="table_show(scope.row)">查看</el-button>
             <el-button type="primary" plain size="small" @click="table_edit(scope.row)">编辑</el-button>
-            <el-button type="primary" plain size="small" @click="table_edit_page(scope.row)">页面编辑
-            </el-button>
+<!--            <el-button type="primary" plain size="small" @click="table_edit_page(scope.row)">页面编辑-->
+<!--            </el-button>-->
             <el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
               <template #reference>
                 <el-button plain type="danger" size="small">删除</el-button>
@@ -71,14 +71,12 @@ export default {
         info: false
       },
       list: {
-        apiObj: this.$API.demo.list,
-
+        apiObj: this.$API.user.teacher.list
       },
       selection: []
     }
   },
   mounted() {
-    this.$API.teacher.teacherList.get()
   },
   methods: {
     //窗口新增
@@ -112,9 +110,9 @@ export default {
     },
     //查看
     table_show(row) {
-      this.dialog.info = true
+      this.dialog.save = true
       this.$nextTick(() => {
-        this.$refs.infoDialog.setData(row)
+        this.$refs.saveDialog.open('show').setData(row)
       })
     },
     //删除明细
@@ -151,16 +149,9 @@ export default {
       this.selection = selection
     },
     //本地更新数据
-    handleSaveSuccess(data, mode) {
-      //为了减少网络请求，直接变更表格内存数据
-      if (mode == 'add') {
-        this.$refs.table.unshiftRow(data)
-      } else if (mode == 'edit') {
-        this.$refs.table.updateKey(data)
-      }
-
-      //当然也可以暴力的直接刷新表格
-      // this.$refs.table.refresh()
+    handleSaveSuccess() {
+      // 刷新表格
+      this.$refs.table.refresh()
     }
   }
 }

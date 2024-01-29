@@ -61,7 +61,7 @@ const routes = [
                 role: ["SA", "S"]
             }
         }]
-    }
+    },
 ]
 
 // const routes = []

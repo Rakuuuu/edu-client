@@ -198,8 +198,8 @@ export default {
       var reqData = {
         [config.request.page]: this.currentPage,
         [config.request.pageSize]: this.scPageSize,
-        [config.request.prop]: this.prop,
-        [config.request.order]: this.order
+        // [config.request.prop]: this.prop,
+        // [config.request.order]: this.order
       }
       if (this.hidePagination) {
         delete reqData[config.request.page]
@@ -208,10 +208,11 @@ export default {
       Object.assign(reqData, this.tableParams)
 
       try {
+        console.log('请求参数：', reqData)
         var res = await this.apiObj.get(reqData);
       } catch (error) {
         this.loading = false;
-        this.emptyText = error.statusText;
+        this.emptyText = '请求错误';
         return false;
       }
       try {
@@ -222,6 +223,7 @@ export default {
         return false;
       }
       if (response.code != config.successCode) {
+        console.log(111)
         this.loading = false;
         this.emptyText = response.msg;
       } else {
