@@ -1,4 +1,3 @@
-
 <div align="center">
 
 ![logo](https://lolicode.gitee.io/scui-doc/logo.png)
@@ -20,6 +19,7 @@
 </div>
 
 ## 介绍
+
 SCUI 是一个中后台前端解决方案，基于VUE3和elementPlus实现。
 使用最新的前端技术栈，提供各类实用的组件方便在业务开发时的调用，并且持续性的提供丰富的业务模板帮助你快速搭建企业级中后台前端任务。
 
@@ -29,12 +29,10 @@ SCUI的宗旨是 让一切复杂的东西傻瓜化。
 
 ## 演示和文档
 
-| 类型 | 链接 |
-| -------- | -------- |
-| 文档地址 | https://lolicode.gitee.io/scui-doc/ |
-| 演示地址  | https://lolicode.gitee.io/scui-doc/demo/#/login |
-
-
+| 类型   | 链接                                              |
+|------|-------------------------------------------------|
+| 文档地址 | https://lolicode.gitee.io/scui-doc/             |
+| 演示地址 | https://lolicode.gitee.io/scui-doc/demo/#/login |
 
 ## 特点
 
@@ -46,12 +44,12 @@ SCUI的宗旨是 让一切复杂的东西傻瓜化。
 - **性能** 在减少带宽请求和前端算力上多次优化，并且持续着
 - **其他** 多功能视图标签、动态权限菜单、控制台组态化、统一异常处理等等
 
-
 ## 部分截图
 
 ![logo](https://lolicode.gitee.io/scui-doc/g_2.jpg)
 
 ## 安装教程
+
 ``` sh
 # 克隆项目
 git clone https://gitee.com/lolicode/scui.git
@@ -65,6 +63,7 @@ npm i
 # 启动项目(开发模式)
 npm run serve
 ```
+
 启动完成后浏览器访问 http://localhost:2800
 
 ## 鸣谢
@@ -72,4 +71,5 @@ npm run serve
 <img src="https://www.fastmock.site/resource/images/logo.png" style="height:40px"/>
 
 ## 支持
+
 如果觉得本项目还不错或在工作中有所启发，请在Gitee(码云)帮开发者点亮星星，这是对开发者最大的支持和鼓励！
