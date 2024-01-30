@@ -4,8 +4,8 @@
       <el-tabs tab-position="top">
         <el-tab-pane label="普通打印">
           <el-alert
-              title="打印当前页面已存在的元素,如包含.no-print样式就忽略,分页打印就需要{page-break-after: always}控制"
-              type="success" style="margin-bottom:20px;"></el-alert>
+            title="打印当前页面已存在的元素,如包含.no-print样式就忽略,分页打印就需要{page-break-after: always}控制"
+            type="success" style="margin-bottom:20px;"></el-alert>
           <el-button type="primary" @click="print">普通打印</el-button>
           <div style="height:20px"></div>
           <div class="printMain" ref="printMain">

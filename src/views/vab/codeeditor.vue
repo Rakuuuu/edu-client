@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       json:
-          `{
+        `{
 	"name": "SCUI",
 	"menu": [
 		{
@@ -56,13 +56,13 @@ export default {
 	]
 }`,
       js:
-          `// Demo code (the actual new parser character stream implementation)
+        `// Demo code (the actual new parser character stream implementation)
 function StringStream(string) {
 	this.pos = 0;
 	this.string = string;
 }`,
       sql:
-          `SELECT \`author\`, \`title\` FROM \`posts\`
+        `SELECT \`author\`, \`title\` FROM \`posts\`
 WHERE \`status\` = 'draft' AND \`author\` IN('author1','author2')
 ORDER BY \`created_at\` DESC, \`id\` DESC LIMIT 0, 10;`
     }

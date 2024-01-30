@@ -7,7 +7,7 @@
           <div class="code-item">
             <div class="img" :style="{background: item.color}">
               <el-icon
-                  :style="`background-image: -webkit-linear-gradient(top left, #fff, ${item.color} 100px)`">
+                :style="`background-image: -webkit-linear-gradient(top left, #fff, ${item.color} 100px)`">
                 <component :is="item.icon"/>
               </el-icon>
             </div>

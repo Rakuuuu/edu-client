@@ -4,12 +4,12 @@
       <el-form-item label="姓名" prop="teacherName">
         <el-input v-model="form.teacherName" placeholder="请输入姓名" clearable></el-input>
       </el-form-item>
-<!--      <el-form-item label="性别" prop="sex">-->
-<!--        <el-radio-group v-model="form.sex">-->
-<!--          <el-radio label="男">男</el-radio>-->
-<!--          <el-radio label="女">女</el-radio>-->
-<!--        </el-radio-group>-->
-<!--      </el-form-item>-->
+      <!--      <el-form-item label="性别" prop="sex">-->
+      <!--        <el-radio-group v-model="form.sex">-->
+      <!--          <el-radio label="男">男</el-radio>-->
+      <!--          <el-radio label="女">女</el-radio>-->
+      <!--        </el-radio-group>-->
+      <!--      </el-form-item>-->
       <el-form-item label="手机号" prop="teacherPhone">
         <el-input v-model="form.teacherPhone" placeholder="请输入手机号" clearable></el-input>
       </el-form-item>
@@ -49,7 +49,7 @@ export default {
       //验证规则
       rules: {
         teacherName: [
-          { required: true, message: '请输入姓名' }
+          {required: true, message: '请输入姓名', trigger: 'blur' }
         ],
         teacherPhone: [
           {
@@ -63,7 +63,8 @@ export default {
                 callback(new Error('请输入手机号码'))
               }
               callback()
-            }}
+            }
+          }
         ],
         teacherEmail: [
           {
@@ -74,7 +75,8 @@ export default {
                 callback(new Error('请输入正确格式的邮箱'))
               }
               callback()
-            }}
+            }
+          }
         ]
       },
       //所需数据选项
@@ -97,24 +99,27 @@ export default {
       return this
     },
     //表单提交方法
-    submit() {
-      this.$refs.dialogForm.validate().then(async () => {
-        try {
-          await this.$API.user.teacher.update.post(this.form)
-          this.$message({
-            type: 'success',
-            message: '修改成功'
-          })
-          this.visible = false
-          this.$emit('success')
-        } catch (err) { /* empty */ }
-      }).catch(() => {})
+    async submit() {
+      const operate = this.mode === 'edit' ? 'update' : 'add'
+      try {
+        await this.$refs.dialogForm.validate()
+        await this.$API.user.teacher[operate].post(this.form)
+        this.$message({
+          type: 'success',
+          message: `${this.titleMap[this.mode]}成功`
+        })
+        this.visible = false
+        this.$emit('success')
+      } catch (err) {
+        /* empty */
+      }
     },
     //表单注入数据
-    setData({ teacherId }) {
-      this.$API.user.teacher.detail.get({ teacherId }).then(({ data }) => {
+    setData({teacherId}) {
+      this.$API.user.teacher.detail.get({teacherId}).then(({data}) => {
         this.form = data
-      }).catch(() => {})
+      }).catch(() => {
+      })
     }
   }
 }

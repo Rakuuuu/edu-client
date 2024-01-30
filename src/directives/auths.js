@@ -8,17 +8,17 @@ import tool from '@/utils/tool';
  * @directive 多个权限验证，全部满足则显示（v-auths-all="['xxx','xxx']"）
  */
 export default {
-    mounted(el, binding) {
-        if (permissionAll()) {
-            return
-        }
-        let permissions = tool.data.get("PERMISSIONS");
-        let flag = false;
-        permissions.map((val) => {
-            binding.value.map((v) => {
-                if (val === v) flag = true;
-            });
-        });
-        if (!flag) el.parentNode.removeChild(el);
+  mounted(el, binding) {
+    if (permissionAll()) {
+      return
     }
+    let permissions = tool.data.get("PERMISSIONS");
+    let flag = false;
+    permissions.map((val) => {
+      binding.value.map((v) => {
+        if (val === v) flag = true;
+      });
+    });
+    if (!flag) el.parentNode.removeChild(el);
+  }
 }

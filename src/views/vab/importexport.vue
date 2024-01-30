@@ -114,8 +114,8 @@
   <el-dialog v-model="importErrDialogVisible" title="导入失败" :width="680" destroy-on-close
              @closed="()=>{importErrData={}}">
     <el-alert
-        :title="`总条目数 ${importErrData.ok} ,其中有 ${importErrData.fail} 条格式不满足导入要求，请修改后再次操作。`"
-        type="error" show-icon :closable="false"/>
+      :title="`总条目数 ${importErrData.ok} ,其中有 ${importErrData.fail} 条格式不满足导入要求，请修改后再次操作。`"
+      type="error" show-icon :closable="false"/>
     <div style="margin-top: 15px;">
       <el-table :data="importErrData.failList" border stripe max-height="270" style="width: 100%">
         <el-table-column prop="keyName" label="主键名" width="180"/>

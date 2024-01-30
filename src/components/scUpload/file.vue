@@ -1,23 +1,23 @@
 <template>
   <div class="sc-upload-file">
     <el-upload
-        :disabled="disabled"
-        :auto-upload="autoUpload"
-        :action="action"
-        :name="name"
-        :data="data"
-        :http-request="request"
-        v-model:file-list="defaultFileList"
-        :show-file-list="showFileList"
-        :drag="drag"
-        :accept="accept"
-        :multiple="multiple"
-        :limit="limit"
-        :before-upload="before"
-        :on-success="success"
-        :on-error="error"
-        :on-preview="handlePreview"
-        :on-exceed="handleExceed">
+      :disabled="disabled"
+      :auto-upload="autoUpload"
+      :action="action"
+      :name="name"
+      :data="data"
+      :http-request="request"
+      v-model:file-list="defaultFileList"
+      :show-file-list="showFileList"
+      :drag="drag"
+      :accept="accept"
+      :multiple="multiple"
+      :limit="limit"
+      :before-upload="before"
+      :on-success="success"
+      :on-error="error"
+      :on-preview="handlePreview"
+      :on-exceed="handleExceed">
       <slot>
         <el-button type="primary" :disabled="disabled">Click to upload</el-button>
       </slot>

@@ -30,7 +30,7 @@
       <el-col :lg="12">
         <el-card shadow="never" @contextmenu.prevent="openMenu">
           <div
-              style="height:500px;display: flex;flex-direction: column;align-items: center;justify-content: center;color: #999;">
+            style="height:500px;display: flex;flex-direction: column;align-items: center;justify-content: center;color: #999;">
             试试看在上下左右四个角落右键，看看边缘位置修正效果
           </div>
         </el-card>

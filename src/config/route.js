@@ -5,63 +5,63 @@
 // 示例如下
 
 const routes = [
-    {
-        name: "demo",
-        path: "/demo",
-        meta: {
-            icon: "el-icon-eleme-filled",
-            title: "演示",
-            role: ["SA"]
-        },
-        children: [{
-            name: "demopage",
-            path: "/demopage",
-            component: "test/autocode/index",
-            meta: {
-                icon: "el-icon-menu",
-                title: "演示页面",
-                role: ["SA"]
-            }
-        }]
+  {
+    name: "demo",
+    path: "/demo",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "演示",
+      role: ["SA"]
     },
-    {
-        name: "teacherManage",
-        path: "/teacherManage",
-        meta: {
-            icon: "el-icon-eleme-filled",
-            title: "教师管理",
-            role: ["SA", "S"]
-        },
-        children: [{
-            name: "teacherList",
-            path: "/teacherList",
-            component: "teacherManage/index",
-            meta: {
-                icon: "el-icon-menu",
-                title: "教师列表",
-                role: ["SA", "S"]
-            }
-        }]
+    children: [{
+      name: "demopage",
+      path: "/demopage",
+      component: "test/autocode/index",
+      meta: {
+        icon: "el-icon-menu",
+        title: "演示页面",
+        role: ["SA"]
+      }
+    }]
+  },
+  {
+    name: "teacherManage",
+    path: "/teacherManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "教师管理",
+      role: ["SA", "S"]
     },
-    {
-        name: "studentManage",
-        path: "/studentManage",
-        meta: {
-            icon: "el-icon-eleme-filled",
-            title: "学生管理",
-            role: ["SA", "S"]
-        },
-        children: [{
-            name: "studentList",
-            path: "/studentList",
-            component: "teacherManage/index",
-            meta: {
-                icon: "el-icon-menu",
-                title: "学生列表",
-                role: ["SA", "S"]
-            }
-        }]
+    children: [{
+      name: "teacherList",
+      path: "/teacherList",
+      component: "teacherManage/index",
+      meta: {
+        icon: "el-icon-menu",
+        title: "教师列表",
+        role: ["SA", "S"]
+      }
+    }]
+  },
+  {
+    name: "studentManage",
+    path: "/studentManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "学生管理",
+      role: ["SA", "S"]
     },
+    children: [{
+      name: "studentList",
+      path: "/studentList",
+      component: "teacherManage/index",
+      meta: {
+        icon: "el-icon-menu",
+        title: "学生列表",
+        role: ["SA", "S"]
+      }
+    }]
+  },
 ]
 
 // const routes = []

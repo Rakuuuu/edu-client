@@ -30,7 +30,7 @@
   <el-drawer title="日志" v-model="logsVisible" :size="500" direction="rtl" destroy-on-close>
     <el-main style="padding:0 20px 20px 20px;">
 			<pre
-          style="font-size: 12px;color: #999;padding:20px;background: #333;font-family: consolas;line-height: 1.5;overflow: auto;">{{
+        style="font-size: 12px;color: #999;padding:20px;background: #333;font-family: consolas;line-height: 1.5;overflow: auto;">{{
           demoLog
         }}</pre>
     </el-main>

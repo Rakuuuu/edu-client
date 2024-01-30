@@ -46,8 +46,8 @@
       <el-col :lg="10">
         <el-card shadow="never" header="已内置剪裁的上传组件">
           <el-alert
-              title="设置cropper就可以开启上传前剪裁, 并已封装compress和aspectRatio, 打开F12查看网络请求"
-              type="success" style="margin-bottom:20px;"></el-alert>
+            title="设置cropper就可以开启上传前剪裁, 并已封装compress和aspectRatio, 打开F12查看网络请求"
+            type="success" style="margin-bottom:20px;"></el-alert>
           <sc-upload v-model="uploadImg" title="开启剪裁" :cropper="true" :compress="1"
                      :aspectRatio="1/1"></sc-upload>
         </el-card>

@@ -68,27 +68,27 @@ export default {
     return {
       apiObj: this.$API.
     <%= api.list % >,
-        selection
+      selection
   :
     [],
-        search
+      search
   :
     {
       keyword: ""
     }
   ,
     saveDialogVisible: false,
-        saveMode
+      saveMode
   :
     'add',
-        titleMap
+      titleMap
   :
     {
       add: "新增",
-          edit
+        edit
     :
       "编辑",
-          show
+        show
     :
       "查看"
     }

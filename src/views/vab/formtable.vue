@@ -1,8 +1,8 @@
 <template>
   <el-main>
     <el-alert
-        title="来自AVUE的灵感, 业务会有表单里含有对象数组的可能, 进行封装后进行增删改操作, 并且支持联动form表单的禁用属性"
-        type="success" style="margin-bottom:20px;"></el-alert>
+      title="来自AVUE的灵感, 业务会有表单里含有对象数组的可能, 进行封装后进行增删改操作, 并且支持联动form表单的禁用属性"
+      type="success" style="margin-bottom:20px;"></el-alert>
 
     <el-card shadow="never">
       <el-form ref="ruleForm" :model="form" :rules="rules" label-width="100px">

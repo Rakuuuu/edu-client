@@ -8,14 +8,14 @@
               1.远程获取表单配置参数和表单的值
             </el-timeline-item>
             <el-timeline-item
-                timestamp="构建form对象, 循环渲染对应组件, 获取远程选项数据. 完成前组件将由骨架代替">
+              timestamp="构建form对象, 循环渲染对应组件, 获取远程选项数据. 完成前组件将由骨架代替">
               2.根据配置构建表单组件
             </el-timeline-item>
             <el-timeline-item timestamp="合并form对象和表单值">3.给表单赋值</el-timeline-item>
           </el-timeline>
           <el-alert
-              title="当前版本为预览版本,并未在正式项目中实施,请谨慎使用. 更多配置以及图形化编辑器正在路上."
-              type="warning" show-icon></el-alert>
+            title="当前版本为预览版本,并未在正式项目中实施,请谨慎使用. 更多配置以及图形化编辑器正在路上."
+            type="warning" show-icon></el-alert>
         </el-card>
         <el-card shadow="never" header="双向绑定">
           <el-button type="primary" @click="setName">改变输入框的值</el-button>

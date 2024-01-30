@@ -30,12 +30,12 @@ export default {
     <%= base.rowKey % >
   :
     "",
-        <% column.forEach(function (item, index) { %>
+      <% column.forEach(function (item, index) { %>
     <
       %= item.prop % >
     :
       "",
-          <%
+        <%
     }) % >
   },
     //验证规则
@@ -47,7 +47,7 @@ export default {
         [
           {required: true, message: '请输入<%= item.label %>'}
         ],
-            <%
+          <%
       }) % >
     }
   ,
@@ -72,12 +72,12 @@ export default {
       this.form.
       <%= base.rowKey % > = data.
       <%= base.rowKey % >
-          < % column.forEach(function (item, index) { %>
-            this.form.
-            <%= item.prop % > = data.
-            <%= item.prop % >
-                < %
-          }) % >
+        < % column.forEach(function (item, index) { %>
+          this.form.
+          <%= item.prop % > = data.
+          <%= item.prop % >
+            < %
+        }) % >
       //可以和上面一样单个注入，也可以像下面一样直接合并进去
       //Object.assign(this.form, data)
     }

@@ -298,30 +298,30 @@ export default {
         inputPattern: /\S/,
         inputErrorMessage: '名称不能为空'
       })
-          .then(async ({value}) => {
-            this.saveLoading = true
-            const saveObj = {
-              title: value,
-              filterObj: this.filterObj
-            }
-            try {
-              var save = await config.saveMy(this.filterName, saveObj)
-            } catch (error) {
-              this.saveLoading = false
-              console.log(error);
-              return false
-            }
-            if (!save) {
-              return false
-            }
-
-            this.myFilter.push(saveObj)
-            this.$message.success(`${this.filterName} 保存常用成功`)
+        .then(async ({value}) => {
+          this.saveLoading = true
+          const saveObj = {
+            title: value,
+            filterObj: this.filterObj
+          }
+          try {
+            var save = await config.saveMy(this.filterName, saveObj)
+          } catch (error) {
             this.saveLoading = false
-          })
-          .catch(() => {
-            //
-          })
+            console.log(error);
+            return false
+          }
+          if (!save) {
+            return false
+          }
+
+          this.myFilter.push(saveObj)
+          this.$message.success(`${this.filterName} 保存常用成功`)
+          this.saveLoading = false
+        })
+        .catch(() => {
+          //
+        })
     },
     //清空过滤
     clear() {

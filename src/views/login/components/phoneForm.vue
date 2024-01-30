@@ -11,7 +11,7 @@
         <el-input v-model="form.yzm" prefix-icon="el-icon-unlock" clearable
                   :placeholder="$t('login.smsPlaceholder')"></el-input>
         <el-button @click="getYzm" :disabled="disabled">{{ this.$t('login.smsGet') }}<span
-            v-if="disabled"> ({{ time }})</span></el-button>
+          v-if="disabled"> ({{ time }})</span></el-button>
       </div>
     </el-form-item>
     <el-form-item>

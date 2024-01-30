@@ -9,31 +9,30 @@
     </el-header>
     <el-main class="nopadding">
       <scTable
-          ref="table"
-          :apiObj="list.apiObj"
-          row-key="id"
-          @selection-change="selectionChange"
-          stripe
+        ref="table"
+        :apiObj="list.apiObj"
+        row-key="id"
+        @selection-change="selectionChange"
+        stripe
       >
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column label="姓名" prop="teacherName" width="180"></el-table-column>
         <el-table-column label="手机号" prop="teacherPhone" width="150"></el-table-column>
         <el-table-column label="邮箱" prop="teacherEmail" width="250"></el-table-column>
         <el-table-column label="创建时间" prop="createdAt" width="150"></el-table-column>
-        <el-table-column label="修改时间" prop="createdAt" width="150"></el-table-column>
-<!--        <el-table-column label="状态" prop="boolean" width="60">-->
-<!--          <template #default="scope">-->
-<!--            <sc-status-indicator v-if="scope.row.boolean" type="success"></sc-status-indicator>-->
-<!--            <sc-status-indicator v-if="!scope.row.boolean" pulse type="danger"></sc-status-indicator>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
-        <el-table-column label="评分" prop="num" width="150"></el-table-column>
+        <el-table-column label="修改时间" prop="updatedAt" width="150"></el-table-column>
+        <!--        <el-table-column label="状态" prop="boolean" width="60">-->
+        <!--          <template #default="scope">-->
+        <!--            <sc-status-indicator v-if="scope.row.boolean" type="success"></sc-status-indicator>-->
+        <!--            <sc-status-indicator v-if="!scope.row.boolean" pulse type="danger"></sc-status-indicator>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column label="操作" fixed="right" align="right" width="300">
           <template #default="scope">
             <el-button plain size="small" @click="table_show(scope.row)">查看</el-button>
             <el-button type="primary" plain size="small" @click="table_edit(scope.row)">编辑</el-button>
-<!--            <el-button type="primary" plain size="small" @click="table_edit_page(scope.row)">页面编辑-->
-<!--            </el-button>-->
+            <!--            <el-button type="primary" plain size="small" @click="table_edit_page(scope.row)">页面编辑-->
+            <!--            </el-button>-->
             <el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
               <template #reference>
                 <el-button plain type="danger" size="small">删除</el-button>
@@ -46,29 +45,23 @@
   </el-container>
 
   <save-dialog v-if="dialog.save" ref="saveDialog" @success="handleSaveSuccess"
-               @closed="dialog.save=false"></save-dialog>
+               @closed="dialog.save=false">
 
-  <el-drawer v-model="dialog.info" :size="800" title="详细" direction="rtl" destroy-on-close>
-    <info ref="infoDialog"></info>
-  </el-drawer>
-
+  </save-dialog>
 </template>
 
 <script>
 import saveDialog from './component/save.vue'
-import info from './component/info.vue'
 
 export default {
   name: 'teacherManage',
   components: {
-    saveDialog,
-    info
+    saveDialog
   },
   data() {
     return {
       dialog: {
-        save: false,
-        info: false
+        save: false
       },
       list: {
         apiObj: this.$API.user.teacher.list
@@ -116,33 +109,29 @@ export default {
       })
     },
     //删除明细
-    async table_del(row, index) {
-      var reqData = {id: row.id}
-      var res = await this.$API.demo.post.post(reqData);
-      if (res.code == 200) {
-        this.$refs.table.removeIndex(index)
-        this.$message.success("删除成功")
-      } else {
-        this.$alert(res.message, "提示", {type: 'error'})
-      }
+    table_del(row) {
+      const teacherIdList = [row.teacherId]
+      this.$API.user.teacher.delete.post({ teacherIdList }).then(() => {
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        })
+        // 刷新表格
+        this.$refs.table.refresh()
+      }).catch(() => {})
     },
     //批量删除
     async batch_del() {
-      var confirmRes = await this.$confirm(`确定删除选中的 ${this.selection.length} 项吗？`, '提示', {
-        type: 'warning',
-        confirmButtonText: '删除',
-        confirmButtonClass: 'el-button--danger'
-      }).catch(() => {
-      })
-
-      if (!confirmRes) {
-        return false
+      try {
+        await this.$confirm(`确定删除选中数据吗？`, '提示', { type: 'warning' })
+        await this.$API.user.teacher.delete.post({
+          teacherIdList: this.selection.map(({ teacherId }) => teacherId)
+        })
+        this.$message.success("操作成功")
+        this.$refs.table.refresh()
+      } catch (err) {
+        /* empty */
       }
-
-      var ids = this.selection.map(v => v.id)
-      this.$refs.table.removeKeys(ids)
-      this.$message.success("操作成功")
-
     },
     //表格选择后回调事件
     selectionChange(selection) {
