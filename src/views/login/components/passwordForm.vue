@@ -88,35 +88,39 @@ export default {
   },
   methods: {
     async login() {
-
-      var validate = await this.$refs.loginForm.validate().catch(() => {
-      })
-      if (!validate) {
-        return false
-      }
-
-      this.islogin = true
-      var data = {
-        adminPhone: this.form.user,
-        password: this.$TOOL.crypto.MD5(this.form.password)
-      }
-      //获取token
-      var user = await this.$API.auth.login.post(data)
-      this.islogin = false
-      if (user.code == 0) {
-        this.$TOOL.cookie.set("TOKEN", user.data.token, {
-          expires: this.form.autologin ? 24 * 60 * 60 : 0
+      try {
+        const validate = await this.$refs.loginForm.validate().catch(() => {
         })
-        this.$TOOL.data.set("USER_INFO", user.data.userInfo)
-      } else {
-        this.$message.warning(user.message)
-        return false
-      }
+        if (!validate) {
+          return false
+        }
 
-      this.$router.replace({
-        path: '/'
-      })
-      this.$message.success("登录成功")
+        this.islogin = true
+        const data = {
+          adminPhone: this.form.user,
+          password: this.$TOOL.crypto.MD5(this.form.password)
+        }
+        const user = await this.$API.auth.login.post(data)
+        if (user.code === 0) {
+          //获取token
+          this.$TOOL.cookie.set("TOKEN", user.data.token, {
+            expires: this.form.autologin ? 24 * 60 * 60 : 0
+          })
+          console.log(user.data.userInfo)
+          this.$TOOL.data.set("USER_INFO", user.data.userInfo)
+          this.$router.push({
+            path: '/'
+          })
+          this.$message.success("登录成功")
+        } else {
+          this.$message.warning(user.message)
+          return false
+        }
+      } catch (e) {
+        /* empty */
+      } finally {
+        this.islogin = false
+      }
     },
   }
 }

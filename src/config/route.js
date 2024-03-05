@@ -6,23 +6,14 @@
 
 const routes = [
   {
-    name: "demo",
-    path: "/demo",
+    name: "demopage",
+    path: "/demopage",
+    component: "test/autocode/index",
     meta: {
       icon: "el-icon-eleme-filled",
-      title: "演示",
-      role: ["SA"]
-    },
-    children: [{
-      name: "demopage",
-      path: "/demopage",
-      component: "test/autocode/index",
-      meta: {
-        icon: "el-icon-menu",
-        title: "演示页面",
-        role: ["SA"]
-      }
-    }]
+      title: "控制台",
+      affix: true
+    }
   },
   {
     name: "teacherManage",
@@ -34,8 +25,8 @@ const routes = [
     },
     children: [{
       name: "teacherList",
-      path: "/teacherList",
-      component: "teacherManage/index",
+      path: "/teacherManage/teacherList",
+      component: "teacherManage/teacherList/index",
       meta: {
         icon: "el-icon-menu",
         title: "教师列表",
@@ -53,8 +44,8 @@ const routes = [
     },
     children: [{
       name: "studentList",
-      path: "/studentList",
-      component: "teacherManage/index",
+      path: "/studentManage/studentList",
+      component: "studentManage/studentList/index",
       meta: {
         icon: "el-icon-menu",
         title: "学生列表",
@@ -62,8 +53,115 @@ const routes = [
       }
     }]
   },
+  {
+    name: "adminManage",
+    path: "/adminManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "教学秘书管理",
+      role: ["SA"]
+    },
+    children: [{
+      name: "adminList",
+      path: "/adminManage/adminList",
+      component: "adminManage/adminList/index",
+      meta: {
+        icon: "el-icon-menu",
+        title: "管理员列表",
+        role: ["SA"]
+      }
+    }]
+  },
+  {
+    name: "departmentManage",
+    path: "/departmentManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "院系管理"
+    },
+    children: [
+      {
+        name: "departmentList",
+        path: "/departmentManage/departmentList",
+        component: "departmentManage/departmentList/index",
+        meta: {
+          icon: "el-icon-menu",
+          title: "学院列表",
+          role: ["SA"]
+        }
+      },
+      {
+        name: "specialityList",
+        path: "/departmentManage/specialityList",
+        component: "departmentManage/specialityList/index",
+        meta: {
+          icon: "el-icon-menu",
+          title: "专业列表",
+          role: ["SA", "S"]
+        }
+      }
+    ]
+  },
+  {
+    name: "courseManage",
+    path: "/courseManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "课程管理"
+    },
+    children: [
+      {
+        name: "courseList",
+        path: "/courseManage/courseList",
+        component: "courseManage/courseList/index",
+        meta: {
+          icon: "el-icon-menu",
+          title: "课程列表"
+        }
+      },
+      {
+        name: "chooseCourseDetail",
+        path: "/courseManage/chooseCourseDetail",
+        component: 'courseManage/courseList/component/info.vue',
+        meta: {
+          icon: "el-icon-menu",
+          title: "选课学生列表",
+          hidden: true,
+          fullpage: true
+        }
+      },
+    ]
+  },
+  {
+    name: "postManage",
+    path: "/postManage",
+    meta: {
+      icon: "el-icon-eleme-filled",
+      title: "帖子管理"
+    },
+    children: [
+      {
+        name: "postList",
+        path: "/postManage/postList",
+        component: "postManage/postList/index",
+        meta: {
+          icon: "el-icon-menu",
+          title: "帖子列表"
+        }
+      },
+      {
+        name: "postDetail",
+        path: "/postManage/postDetail",
+        component: 'postManage/postList/component/info.vue',
+        meta: {
+          icon: "el-icon-menu",
+          title: "帖子详情",
+          hidden: true,
+          fullpage: true
+        }
+      },
+    ]
+  },
 ]
-
-// const routes = []
 
 export default routes;

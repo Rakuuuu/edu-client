@@ -237,7 +237,7 @@ export default {
         this.summary = response.summary || {};
         this.loading = false;
       }
-      this.$refs.scTable.setScrollTop(0)
+      this.$refs.scTable?.setScrollTop(0)
       this.$emit('dataChange', res, this.tableData)
     },
     //分页点击

@@ -64,15 +64,20 @@ export default {
       this.loading = true
       this.dicParams[config.request.name] = this.dic
       var res = {}
-      if (this.apiObj) {
-        res = await this.apiObj.get(this.params)
-      } else if (this.dic) {
-        res = await config.dicApiObj.get(this.params)
+      try{
+        if (this.apiObj) {
+          res = await this.apiObj.get(this.params)
+        } else if (this.dic) {
+          res = await config.dicApiObj.get(this.params)
+        }
+      } catch (e) {
+        /* empty */
+      } finally {
+        var response = config.parseData(res)
+        this.options = response.data
+        this.loading = false
+        this.initloading = false
       }
-      var response = config.parseData(res)
-      this.options = response.data
-      this.loading = false
-      this.initloading = false
     },
     //判断是否有回显默认值
     hasValue() {

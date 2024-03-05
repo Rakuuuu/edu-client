@@ -16,9 +16,10 @@
         stripe
       >
         <el-table-column type="selection" width="50"></el-table-column>
-        <el-table-column label="姓名" prop="teacherName" width="180"></el-table-column>
-        <el-table-column label="手机号" prop="teacherPhone" width="150"></el-table-column>
-        <el-table-column label="邮箱" prop="teacherEmail" width="250"></el-table-column>
+        <el-table-column label="姓名" prop="adminName" width="180"></el-table-column>
+        <el-table-column label="手机号" prop="adminPhone" width="150"></el-table-column>
+        <el-table-column label="邮箱" prop="adminEmail" width="250"></el-table-column>
+        <el-table-column label="所属学院" prop="departmentName" width="180"></el-table-column>
         <el-table-column label="创建时间" prop="createdAt" width="150"></el-table-column>
         <el-table-column label="修改时间" prop="updatedAt" width="150"></el-table-column>
         <!--        <el-table-column label="状态" prop="boolean" width="60">-->
@@ -54,7 +55,7 @@
 import saveDialog from './component/save.vue'
 
 export default {
-  name: 'teacherManage',
+  name: 'adminList',
   components: {
     saveDialog
   },
@@ -64,7 +65,7 @@ export default {
         save: false
       },
       list: {
-        apiObj: this.$API.user.teacher.list
+        apiObj: this.$API.user.admin.list
       },
       selection: []
     }
@@ -110,8 +111,8 @@ export default {
     },
     //删除明细
     table_del(row) {
-      const teacherIdList = [row.teacherId]
-      this.$API.user.teacher.delete.post({ teacherIdList }).then(() => {
+      const adminIdList = [row.adminId]
+      this.$API.user.admin.delete.post({ adminIdList }).then(() => {
         this.$message({
           message: '删除成功',
           type: 'success'
@@ -124,8 +125,8 @@ export default {
     async batch_del() {
       try {
         await this.$confirm(`确定删除选中数据吗？`, '提示', { type: 'warning' })
-        await this.$API.user.teacher.delete.post({
-          teacherIdList: this.selection.map(({ teacherId }) => teacherId)
+        await this.$API.user.admin.delete.post({
+          adminIdList: this.selection.map(({ adminId }) => adminId)
         })
         this.$message.success("操作成功")
         this.$refs.table.refresh()
