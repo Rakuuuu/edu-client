@@ -160,6 +160,15 @@ const routes = [
           fullpage: true
         }
       },
+      {
+        name: "commentList",
+        path: "/postManage/commentList",
+        component: "postManage/commentList/index",
+        meta: {
+          icon: "el-icon-menu",
+          title: "评论列表"
+        }
+      },
     ]
   },
 ]

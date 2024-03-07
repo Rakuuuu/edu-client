@@ -23,6 +23,36 @@ export default {
       post: async function (params) {
         return await http.post(this.url, params);
       }
+    },
+    delete: {
+      url: `${config.API_URL}/postManage/deletePost`,
+      name: "批量删除帖子",
+      post: async function (params) {
+        return await http.post(this.url, params);
+      }
+    }
+  },
+  comment: {
+    list: {
+      url: `${config.API_URL}/commentManage/commentList`,
+      name: "获取评论列表",
+      get: async function (params) {
+        return await http.get(this.url, params);
+      }
+    },
+    detail: {
+      url: `${config.API_URL}/commentManage/getCommentDetail`,
+      name: "获取评论详情",
+      get: async function (params) {
+        return await http.get(this.url, params);
+      }
+    },
+    delete: {
+      url: `${config.API_URL}/commentManage/deleteComment`,
+      name: "批量删除评论",
+      post: async function (params) {
+        return await http.post(this.url, params);
+      }
     }
   }
 }

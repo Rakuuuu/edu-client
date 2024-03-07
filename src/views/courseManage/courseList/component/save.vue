@@ -1,6 +1,6 @@
 <template>
-  <el-dialog :title="titleMap[mode]" v-model="visible" :width="500" destroy-on-close @closed="$emit('closed')">
-    <el-form :model="form" :rules="rules" :disabled="mode=='show'" ref="dialogForm" label-width="100px">
+  <el-dialog :title="titleMap[mode]" v-model="visible" :width="650" destroy-on-close @closed="$emit('closed')">
+    <el-form :model="form" :rules="rules" :disabled="mode=='show'" ref="dialogForm" label-width="120px">
       <el-form-item label="课程名称" prop="courseName">
         <el-input v-model="form.courseName" placeholder="请输入课程名称" clearable></el-input>
       </el-form-item>
@@ -38,6 +38,26 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="课程所属专业" prop="specialityId">
+        <el-select
+          v-model="form.specialityId"
+          placeholder="请选择"
+          :disabled="mode!=='add'"
+        >
+          <el-option-group
+            v-for="group in specialityOptions"
+            :key="group.departmentName"
+            :label="group.departmentName"
+          >
+            <el-option
+              v-for="item in group.edu_specialities"
+              :key="item.specialityName"
+              :label="item.specialityName"
+              :value="item.specialityId"
+            />
+          </el-option-group>
+        </el-select>
+      </el-form-item>
       <el-form-item label="加课码" prop="adminEmail">
         <el-input v-model="form.courseCode" placeholder="请输入加课码" clearable></el-input>
       </el-form-item>
@@ -70,57 +90,24 @@ export default {
         courseDescription: '',
         courseType: '',
         courseCode: '',
-        teacherId: ''
-        // adminSex: "男",
-        // adminPhone: "",
-        // adminEmail: ""
+        teacherId: '',
+        specialityId: ''
       },
       courseTypes: [],
       teacherList: [],
+      specialityOptions: [],
       //验证规则
       rules: {
         courseName: [
-          {required: true, message: '请输入课程名称', trigger: 'blur' }
+          { required: true, message: '请输入课程名称', trigger: 'blur' }
         ],
-        // adminPhone: [
-        //   {
-        //     required: true,
-        //     trigger: 'blur',
-        //     validator: (rules, value, callback) => {
-        //       if (!phoneReg.test(value) && value) {
-        //         callback(new Error('请输入正确格式的手机号码'))
-        //       }
-        //       if (!value) {
-        //         callback(new Error('请输入手机号码'))
-        //       }
-        //       callback()
-        //     }
-        //   }
-        // ],
-        // adminEmail: [
-        //   {
-        //     trigger: 'blur',
-        //     validator: (rules, value, callback) => {
-        //       if (!emailReg.test(value) && value) {
-        //         console.log(111)
-        //         callback(new Error('请输入正确格式的邮箱'))
-        //       }
-        //       callback()
-        //     }
-        //   }
-        // ]
+        specialityId: [
+          { required: true, message: '请选择课程所属专业', trigger: 'change' }
+        ],
       },
-      //所需数据选项
-      groups: [],
-      groupsProps: {
-        value: "id",
-        emitPath: false,
-        checkStrictly: true
-      }
     }
   },
   mounted() {
-
   },
   methods: {
     //显示
@@ -131,6 +118,10 @@ export default {
       })
       this.$API.user.teacher.getTeacherByNameOrNo.get().then(({ data }) => {
         this.teacherList = data
+      }).catch(() => {
+      })
+      this.$API.department.speciality.all.get().then(({ data }) => {
+        this.specialityOptions = data
       }).catch(() => {
       })
       this.mode = mode;

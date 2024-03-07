@@ -40,6 +40,13 @@ export default {
         return await http.get(this.url, params);
       }
     },
+    all: {
+      url: `${config.API_URL}/specialityManage/getAllSpeciality`,
+      name: "依据学院获取所有专业",
+      get: async function (params) {
+        return await http.get(this.url, params);
+      }
+    },
     update: {
       url: `${config.API_URL}/specialityManage/updateSpeciality`,
       name: "更新专业信息",
