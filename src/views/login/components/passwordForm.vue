@@ -3,12 +3,12 @@
     <el-form-item prop="user">
       <el-input v-model="form.user" prefix-icon="el-icon-user" clearable
                 :placeholder="$t('login.userPlaceholder')">
-        <!--				<template #append>-->
-        <!--					<el-select v-model="userType" style="width: 130px;">-->
-        <!--						<el-option :label="$t('login.admin')" value="admin"></el-option>-->
-        <!--						<el-option :label="$t('login.user')" value="user"></el-option>-->
-        <!--					</el-select>-->
-        <!--				</template>-->
+        				<template #append>
+        					<el-select v-model="userType" style="width: 80px;">
+        						<el-option label="学生" value="student"></el-option>
+        						<el-option label="教师" value="teacher"></el-option>
+        					</el-select>
+        				</template>
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
@@ -40,7 +40,8 @@
 export default {
   data() {
     return {
-      userType: 'admin',
+      // 登陆类型：'student' 和 'teacher'
+      userType: 'student',
       form: {
         user: "",
         password: "",
@@ -72,19 +73,7 @@ export default {
       islogin: false,
     }
   },
-  watch: {
-    userType(val) {
-      if (val == 'admin') {
-        this.form.user = 'admin'
-        this.form.password = 'admin'
-      } else if (val == 'user') {
-        this.form.user = 'user'
-        this.form.password = 'user'
-      }
-    }
-  },
   mounted() {
-
   },
   methods: {
     async login() {
@@ -94,13 +83,24 @@ export default {
         if (!validate) {
           return false
         }
-
         this.islogin = true
-        const data = {
-          adminPhone: this.form.user,
-          password: this.$TOOL.crypto.MD5(this.form.password)
+        // 请求参数
+        let data = {}
+        // 返回的用户数据
+        let user = {}
+        if (this.userType === 'student') {
+          data = {
+            studentPhone: this.form.user,
+            password: this.$TOOL.crypto.MD5(this.form.password)
+          }
+          user = await this.$API.user.student.login.post(data)
+        } else if (this.userType === 'teacher') {
+          data = {
+            teacherPhone: this.form.user,
+            password: this.$TOOL.crypto.MD5(this.form.password)
+          }
+          user = await this.$API.user.teacher.login.post(data)
         }
-        const user = await this.$API.auth.login.post(data)
         if (user.code === 0) {
           //获取token
           this.$TOOL.cookie.set("TOKEN", user.data.token, {
@@ -118,6 +118,7 @@ export default {
         }
       } catch (e) {
         /* empty */
+        console.log(e)
       } finally {
         this.islogin = false
       }

@@ -1,20 +1,22 @@
 <template>
-  <div ref="" class="mobile-nav-button" @click="showMobileNav($event)" v-drag draggable="false">
-    <el-icon>
-      <el-icon-menu/>
-    </el-icon>
-  </div>
+<!--  <div ref="" class="mobile-nav-button" @click="showMobileNav($event)">-->
+<!--    <el-icon>-->
+<!--      <el-icon-menu/>-->
+<!--    </el-icon>-->
+<!--  </div>-->
 
-  <el-drawer ref="mobileNavBox" title="移动端菜单" :size="240" v-model="nav" direction="ltr" :with-header="false"
+  <el-drawer ref="mobileNavBox" title="移动端菜单" size="100%" v-model="nav" direction="ltr" :with-header="false"
              destroy-on-close>
     <el-container class="mobile-nav">
       <el-header>
         <div class="logo-bar"><img class="logo" src="img/logo.png"><span>{{ $CONFIG.APP_NAME }}</span></div>
+        <div class="close-btn" @click="nav=false">
+          ×
+        </div>
       </el-header>
       <el-main>
         <el-scrollbar>
-          <el-menu :default-active="$route.meta.active || $route.fullPath" @select="select" router
-                   background-color="#212d3d" text-color="#fff" active-text-color="#409EFF">
+          <el-menu :default-active="$route.meta.active || $route.fullPath" @select="select" router>
             <NavMenu :navMenus="menu"></NavMenu>
           </el-menu>
         </el-scrollbar>
@@ -128,17 +130,21 @@ export default {
 <style scoped>
 .mobile-nav-button {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 50px;
+  left: 0;
   z-index: 10;
   width: 50px;
   height: 50px;
-  background: #409EFF;
-  box-shadow: 0 2px 12px 0 rgba(64, 158, 255, 1);
-  border-radius: 50%;
+  background: var(--el-menu-active-color);
+  opacity: 0.7;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0, 0.3);
+  border-radius: 0 8px 8px 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.mobile-nav-button:hover {
+  opacity: 1;
 }
 
 .mobile-nav-button i {
@@ -147,7 +153,8 @@ export default {
 }
 
 .mobile-nav {
-  background: #212d3d;
+  background: var(--el-bg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 .mobile-nav .el-header {
@@ -164,12 +171,22 @@ export default {
   align-items: center;
   font-weight: bold;
   font-size: 20px;
-  color: #fff;
+  color: var(--el-text-color-primary);
+}
+
+.mobile-nav .close-btn {
+  color: var(--el-text-color-primary);
+  font-size: 32px;
+  padding-bottom: 2px;
 }
 
 .mobile-nav .logo-bar img {
   width: 30px;
   margin-right: 10px;
+}
+
+.mobile-nav .el-scrollbar{
+  background: var(--el-menu-bg-color) !important;
 }
 
 .mobile-nav .el-submenu__title:hover {

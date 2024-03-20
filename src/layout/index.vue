@@ -1,26 +1,28 @@
 <template>
   <!-- 通栏布局 -->
   <template v-if="layout=='header'">
-    <header class="adminui-header">
-      <div class="adminui-header-left">
-        <div class="logo-bar">
-          <img class="logo" src="img/logo.png">
-          <span>{{ $CONFIG.APP_NAME }}</span>
+    <div class="header-outer">
+      <header class="adminui-header">
+        <div class="adminui-header-left">
+          <div class="logo-bar" @click="openMobMenu">
+            <img class="logo" src="img/logo.png">
+            <span>{{ $CONFIG.APP_NAME }}</span>
+          </div>
+          <ul v-if="!ismobile" class="nav">
+            <li v-for="item in menu" :key="item" :class="pmenu.path==item.path?'active':''"
+                @click="showMenu(item)">
+              <el-icon>
+                <component :is="item.meta.icon || 'el-icon-menu'"/>
+              </el-icon>
+              <span>{{ item.meta.title }}</span>
+            </li>
+          </ul>
         </div>
-        <ul v-if="!ismobile" class="nav">
-          <li v-for="item in menu" :key="item" :class="pmenu.path==item.path?'active':''"
-              @click="showMenu(item)">
-            <el-icon>
-              <component :is="item.meta.icon || 'el-icon-menu'"/>
-            </el-icon>
-            <span>{{ item.meta.title }}</span>
-          </li>
-        </ul>
-      </div>
-      <div class="adminui-header-right">
-        <userbar></userbar>
-      </div>
-    </header>
+        <div class="adminui-header-right">
+          <userbar></userbar>
+        </div>
+      </header>
+    </div>
     <section class="aminui-wrapper">
       <div v-if="!ismobile && nextMenu.length>0 || !pmenu.component"
            :class="menuIsCollapse?'aminui-side isCollapse':'aminui-side'">
@@ -42,13 +44,13 @@
           </el-icon>
         </div>
       </div>
-      <Side-m v-if="ismobile"></Side-m>
+      <Side-m v-if="ismobile" ref="sideM"></Side-m>
       <div class="aminui-body el-container">
         <Topbar v-if="!ismobile"></Topbar>
         <Tags v-if="!ismobile && layoutTags"></Tags>
         <div class="adminui-main" id="adminui-main">
           <router-view v-slot="{ Component }">
-            <keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
+            <keep-alive :include="this.$store.state.keepAlive.keepLiveRoute" :max="5">
               <component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow"/>
             </keep-alive>
           </router-view>
@@ -206,11 +208,11 @@
     </el-icon>
   </div>
 
-  <div class="layout-setting" @click="openSetting">
-    <el-icon>
-      <el-icon-brush-filled/>
-    </el-icon>
-  </div>
+<!--  <div class="layout-setting" @click="openSetting">-->
+<!--    <el-icon>-->
+<!--      <el-icon-brush-filled/>-->
+<!--    </el-icon>-->
+<!--  </div>-->
 
   <el-drawer title="布局实时演示" v-model="settingDialog" :size="400" append-to-body destroy-on-close>
     <setting></setting>
@@ -247,7 +249,7 @@ export default {
       menu: [],
       nextMenu: [],
       pmenu: {},
-      active: ''
+      active: '',
     }
   },
   computed: {
@@ -286,8 +288,11 @@ export default {
     openSetting() {
       this.settingDialog = true;
     },
+    openMobMenu (ev) {
+      this.$refs?.sideM?.showMobileNav(ev)
+    },
     onLayoutResize() {
-      this.$store.commit("SET_ismobile", document.body.clientWidth < 992)
+      this.$store.commit("SET_ismobile", document.body.clientWidth < 850)
     },
     //路由监听高亮
     showThis() {

@@ -6,170 +6,146 @@
 
 const routes = [
   {
-    name: "demopage",
-    path: "/demopage",
-    component: "test/autocode/index",
+    name: "index",
+    path: "/index",
+    component: "index/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "控制台",
-      affix: true
+      icon: "el-icon-home-filled",
+      title: "首页",
+      cache: true
     }
   },
   {
-    name: "teacherManage",
-    path: "/teacherManage",
+    name: "course",
+    path: "/course/index",
+    component: "course/index/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "教师管理",
-      role: ["SA", "S"]
+      icon: "el-icon-histogram",
+      title: "课程"
     },
-    children: [{
-      name: "teacherList",
-      path: "/teacherManage/teacherList",
-      component: "teacherManage/teacherList/index",
-      meta: {
-        icon: "el-icon-menu",
-        title: "教师列表",
-        role: ["SA", "S"]
-      }
-    }]
   },
   {
-    name: "studentManage",
-    path: "/studentManage",
+    name: "courseQuery",
+    path: "/course/query",
+    component: "course/query/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "学生管理",
-      role: ["SA", "S"]
-    },
-    children: [{
-      name: "studentList",
-      path: "/studentManage/studentList",
-      component: "studentManage/studentList/index",
-      meta: {
-        icon: "el-icon-menu",
-        title: "学生列表",
-        role: ["SA", "S"]
-      }
-    }]
+      title: "查找课程",
+      hidden: true,
+      cache: true
+    }
   },
   {
-    name: "adminManage",
-    path: "/adminManage",
+    name: "courseEdit",
+    path: "/course/edit",
+    component: "course/edit/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "教学秘书管理",
-      role: ["SA"]
-    },
-    children: [{
-      name: "adminList",
-      path: "/adminManage/adminList",
-      component: "adminManage/adminList/index",
-      meta: {
-        icon: "el-icon-menu",
-        title: "管理员列表",
-        role: ["SA"]
-      }
-    }]
+      title: "课程编辑",
+      hidden: true,
+      fullpage: true
+    }
   },
   {
-    name: "departmentManage",
-    path: "/departmentManage",
+    name: "courseDetail",
+    path: "/course/detail",
+    component: "course/detail/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "院系管理"
-    },
-    children: [
-      {
-        name: "departmentList",
-        path: "/departmentManage/departmentList",
-        component: "departmentManage/departmentList/index",
-        meta: {
-          icon: "el-icon-menu",
-          title: "学院列表",
-          role: ["SA"]
-        }
-      },
-      {
-        name: "specialityList",
-        path: "/departmentManage/specialityList",
-        component: "departmentManage/specialityList/index",
-        meta: {
-          icon: "el-icon-menu",
-          title: "专业列表",
-          role: ["SA", "S"]
-        }
-      }
-    ]
+      title: "课程详情",
+      hidden: true,
+      fullpage: true
+    }
   },
   {
-    name: "courseManage",
-    path: "/courseManage",
+    name: "courseQuery",
+    path: "/course/query",
+    component: "course/query/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "课程管理"
-    },
-    children: [
-      {
-        name: "courseList",
-        path: "/courseManage/courseList",
-        component: "courseManage/courseList/index",
-        meta: {
-          icon: "el-icon-menu",
-          title: "课程列表"
-        }
-      },
-      {
-        name: "chooseCourseDetail",
-        path: "/courseManage/chooseCourseDetail",
-        component: 'courseManage/courseList/component/info.vue',
-        meta: {
-          icon: "el-icon-menu",
-          title: "选课学生列表",
-          hidden: true,
-          fullpage: true
-        }
-      },
-    ]
+      title: "查找课程",
+      hidden: true,
+      cache: true
+    }
   },
   {
-    name: "postManage",
-    path: "/postManage",
+    name: "post",
+    path: "/post/index",
+    component: "post/index/index",
     meta: {
-      icon: "el-icon-eleme-filled",
-      title: "帖子管理"
-    },
-    children: [
-      {
-        name: "postList",
-        path: "/postManage/postList",
-        component: "postManage/postList/index",
-        meta: {
-          icon: "el-icon-menu",
-          title: "帖子列表"
-        }
-      },
-      {
-        name: "postDetail",
-        path: "/postManage/postDetail",
-        component: 'postManage/postList/component/info.vue',
-        meta: {
-          icon: "el-icon-menu",
-          title: "帖子详情",
-          hidden: true,
-          fullpage: true
-        }
-      },
-      {
-        name: "commentList",
-        path: "/postManage/commentList",
-        component: "postManage/commentList/index",
-        meta: {
-          icon: "el-icon-menu",
-          title: "评论列表"
-        }
-      },
-    ]
+      title: "帖子",
+      icon: "el-icon-flag",
+      cache: true
+    }
+  },
+  {
+    name: "postQuery",
+    path: "/post/query",
+    component: "post/query/index",
+    meta: {
+      title: "查找帖子",
+      hidden: true,
+      cache: true
+    }
+  },
+  {
+    name: "postDetail",
+    path: "/post/detail",
+    component: "post/detail/index",
+    meta: {
+      title: "帖子详情",
+      hidden: true,
+      fullpage: true
+    }
+  },
+  {
+    name: "postEdit",
+    path: "/post/edit",
+    component: "post/edit/index",
+    meta: {
+      title: "帖子编辑",
+      hidden: true,
+      fullpage: true
+    }
+  },
+  {
+    name: "question",
+    path: "/question/index",
+    component: "question/index/index",
+    meta: {
+      title: "题目",
+      icon: "el-icon-list",
+      role: ['TEACHER'],
+      cache: true
+    }
+  },
+  {
+    name: "questionDetail",
+    path: "/question/detail",
+    component: "question/detail/index",
+    meta: {
+      title: "题目详情",
+      icon: "el-icon-list",
+      role: ['TEACHER'],
+      hidden: true,
+      fullpage: true
+    }
+  },
+  {
+    name: "file",
+    path: "/file/index",
+    component: "file/index/index",
+    meta: {
+      title: "文件",
+      icon: "el-icon-menu",
+      cache: true
+    }
+  },
+  {
+    name: "fileUpload",
+    path: "/file/upload",
+    component: "file/upload/index",
+    meta: {
+      title: "文件上传",
+      hidden: true,
+      fullpage: true
+    }
   },
 ]
 

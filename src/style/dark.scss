@@ -20,6 +20,12 @@ html.dark {
     background: var(--el-bg-color);
   }
 
+  .header-outer {
+    background: var(--el-bg-color-overlay);
+    border-bottom: 1px solid var(--el-border-color-light);
+    height: 59px;
+  }
+
   //框架
   .adminui-header {
     background: var(--el-bg-color-overlay);

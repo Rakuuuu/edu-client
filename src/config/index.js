@@ -3,7 +3,7 @@ const DEFAULT_CONFIG = {
   APP_NAME: process.env.VUE_APP_TITLE,
 
   //首页地址
-  DASHBOARD_URL: "/demopage",
+  DASHBOARD_URL: "/index",
 
   //版本号
   APP_VER: "1.6.9",
@@ -31,16 +31,16 @@ const DEFAULT_CONFIG = {
 
   //布局 默认：default | 通栏：header | 经典：menu | 功能坞：dock
   //dock将关闭标签和面包屑栏
-  LAYOUT: 'menu',
+  LAYOUT: 'header',
 
   //菜单是否折叠
   MENU_IS_COLLAPSE: false,
 
   //菜单是否启用手风琴效果
-  MENU_UNIQUE_OPENED: false,
+  MENU_UNIQUE_OPENED: true,
 
   //是否开启多标签
-  LAYOUT_TAGS: true,
+  LAYOUT_TAGS: false,
 
   //语言
   LANG: 'zh-cn',

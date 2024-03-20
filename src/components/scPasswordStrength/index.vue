@@ -80,12 +80,12 @@ export default {
 
 <style scoped>
 .sc-password-strength {
-  height: 5px;
+  height: 8px;
   width: 100%;
   background: var(--el-color-info-light-5);
   border-radius: 5px;
   position: relative;
-  margin: 10px 0;
+  margin: 10px 5px;
 }
 
 .sc-password-strength:before {

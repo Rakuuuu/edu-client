@@ -45,6 +45,7 @@ a, button, input, textarea {
 }
 
 .aminui-wrapper {
+  width: 100%;
   display: flex;
   flex: 1;
   overflow: auto;
@@ -98,11 +99,18 @@ a, button, input, textarea {
   color: #fff;
 }
 
+.header-outer {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+}
+
 /* 头部 */
 .adminui-header {
+  margin: 0 auto;
+  max-width: 1280px !important;
   height: 58px;
-  background: #222b45;
-  color: #fff;
+  color: var(--el-text-color-primary);
   display: flex;
   justify-content: space-between;
 }
@@ -111,16 +119,22 @@ a, button, input, textarea {
   display: flex;
   align-items: center;
   padding-left: 20px;
+  color: var(--el-text-color-primary);
+  //flex-shrink: 0;
 }
 
 .adminui-header-right {
+  //flex-shrink: 0;
   display: flex;
   align-items: center;
+  color: var(--el-text-color-primary);
 }
+
 
 .adminui-header .logo-bar {
   font-size: 20px;
   font-weight: bold;
+  color: var(--el-text-color-primary);
   display: flex;
   align-items: center;
 }
@@ -141,7 +155,7 @@ a, button, input, textarea {
   padding: 0 10px;
   margin: 0 10px 0 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--el-text-color-primary);
   list-style: none;
   height: 100%;
   display: flex;
@@ -154,11 +168,15 @@ a, button, input, textarea {
 }
 
 .adminui-header .nav li:hover {
-  color: #fff;
+  color: var(--el-text-color-secondary);
 }
 
 .adminui-header .nav li.active {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--el-color-primary);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: calc(100% - 20px);
+  border-radius: 4px;
   color: #fff;
 }
 
@@ -167,7 +185,7 @@ a, button, input, textarea {
 }
 
 .adminui-header .user-bar .user label {
-  color: #fff;
+  //color: #fff;
 }
 
 /* 左侧菜单 */

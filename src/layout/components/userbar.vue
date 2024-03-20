@@ -1,22 +1,28 @@
 <template>
   <div class="user-bar">
-    <div class="panel-item hidden-sm-and-down" @click="search">
-      <el-icon>
-        <el-icon-search/>
-      </el-icon>
-    </div>
+<!--    <div class="panel-item hidden-sm-and-down" @click="search">-->
+<!--      <el-icon>-->
+<!--        <el-icon-search/>-->
+<!--      </el-icon>-->
+<!--    </div>-->
     <div class="screen panel-item hidden-sm-and-down" @click="screen">
       <el-icon>
         <el-icon-full-screen/>
       </el-icon>
     </div>
-    <div class="tasks panel-item" @click="tasks">
+<!--    <div class="tasks panel-item" @click="tasks">-->
+<!--      <el-icon>-->
+<!--        <el-icon-sort/>-->
+<!--      </el-icon>-->
+<!--    </div>-->
+    <div class="dark panel-item" @click="toDark">
       <el-icon>
-        <el-icon-sort/>
+        <el-icon-sunny v-if="isDark"/>
+        <el-icon-moon v-else />
       </el-icon>
     </div>
     <div class="msg panel-item" @click="showMsg">
-      <el-badge :hidden="msgList.length==0" :value="msgList.length" class="badge" type="danger">
+      <el-badge :is-dot="true" class="badge" type="danger">
         <el-icon>
           <el-icon-chat-dot-round/>
         </el-icon>
@@ -54,7 +60,7 @@
         </el-container>
       </el-drawer>
     </div>
-    <el-dropdown class="user panel-item" trigger="click" @command="handleUser">
+    <el-dropdown class="user panel-item" trigger="click" @command="handleUser" size="large">
       <div class="user-avatar">
         <el-avatar :size="30">{{ userNameF }}</el-avatar>
         <label>{{ userName }}</label>
@@ -97,6 +103,7 @@ export default {
       userNameF: "",
       searchVisible: false,
       tasksVisible: false,
+      isDark: this.$TOOL.data.get('APP_DARK') || false,
       msg: false,
       msgList: [
         {
@@ -131,7 +138,7 @@ export default {
   },
   created() {
     var userInfo = this.$TOOL.data.get("USER_INFO");
-    this.userName = userInfo.adminName;
+    this.userName = userInfo?.studentName || userInfo?.teacherName;
     this.userNameF = this.userName.substring(0, 1);
   },
   methods: {
@@ -190,6 +197,18 @@ export default {
     //任务
     tasks() {
       this.tasksVisible = true
+    },
+    toDark() {
+      const dark = this.$TOOL.data.get('APP_DARK') || false
+      if (!dark) {
+        this.isDark = true
+        document.documentElement.classList.add("dark")
+        this.$TOOL.data.set("APP_DARK", true)
+      } else {
+        this.isDark = false
+        document.documentElement.classList.remove("dark")
+        this.$TOOL.data.remove("APP_DARK")
+      }
     }
   }
 }
@@ -270,6 +289,10 @@ export default {
   width: 100px;
   text-align: right;
   color: #999;
+}
+
+.msg {
+  margin-top: 3px;
 }
 
 .dark .msg-list__main h2 {

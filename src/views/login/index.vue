@@ -59,16 +59,16 @@
           <el-tab-pane :label="$t('login.accountLogin')" lazy>
             <password-form></password-form>
           </el-tab-pane>
-          <!--					<el-tab-pane :label="$t('login.mobileLogin')" lazy>-->
-          <!--						<phone-form></phone-form>-->
-          <!--					</el-tab-pane>-->
+          					<el-tab-pane :label="$t('login.mobileLogin')" lazy>
+          						<phone-form></phone-form>
+          					</el-tab-pane>
         </el-tabs>
-        <!--				<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">-->
-        <!--					<el-divider>{{ $t('login.signInOther') }}</el-divider>-->
-        <!--&lt;!&ndash;					<div class="login-oauth">&ndash;&gt;-->
-        <!--&lt;!&ndash;						<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"></el-button>&ndash;&gt;-->
-        <!--&lt;!&ndash;					</div>&ndash;&gt;-->
-        <!--				</template>-->
+<!--        				<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">-->
+<!--        					<el-divider>{{ $t('login.signInOther') }}</el-divider>-->
+<!--        					<div class="login-oauth">-->
+<!--        						<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"></el-button>-->
+<!--        					</div>-->
+<!--        				</template>-->
       </div>
     </div>
   </div>

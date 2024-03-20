@@ -7,6 +7,7 @@ import tool from '@/utils/tool';
 import systemRouter from './systemRouter';
 import userRoutes from '@/config/route';
 import {beforeEach, afterEach} from './scrollBehavior';
+import store from '@/store/index'
 
 //系统路由
 const routes = systemRouter
@@ -64,6 +65,10 @@ router.beforeEach(async (to, from, next) => {
   //整页路由处理
   if (to.meta.fullpage) {
     to.matched = [to.matched[to.matched.length - 1]]
+  }
+  // 判断是否缓存
+  if (to.meta.cache) {
+    store.commit("pushKeepLive", to.name)
   }
   //加载动态/静态路由
   if (!isGetRouter) {

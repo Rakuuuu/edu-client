@@ -41,7 +41,7 @@ export default {
       }
     },
     all: {
-      url: `${config.API_URL}/specialityManage/getAllSpeciality`,
+      url: `${config.API_URL}/department/getAllSpeciality`,
       name: "依据学院获取所有专业",
       get: async function (params) {
         return await http.get(this.url, params);

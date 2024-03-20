@@ -465,7 +465,7 @@ export default {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 850px) {
   .customizing .widgets {
     transform: scale(1) !important;
   }
